@@ -1,0 +1,17 @@
+name: build ee
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+      - name: setup ansible builder
+        run: python3 -m pip install ansible-builder
+      - name: build image
+        run: ansible-builder build -v 3
