@@ -14,5 +14,5 @@ jobs:
       - name: setup ansible builder
         run: python3 -m pip install ansible-builder
       - name: build image
-        run: ansible-builder build -v 3
+        run: ansible-builder build -v 3 -t ghcr.io/zaki-lknr/ee-example:latest
       - run: podman image ls
