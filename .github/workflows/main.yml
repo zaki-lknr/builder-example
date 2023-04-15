@@ -2,8 +2,11 @@ name: build ee
 
 on:
   push:
-    branches:
-      - main
+    branches-ignore:
+      - '**'
+    tags:
+      - 'v*'
+    # https://docs.docker.com/build/ci/github-actions/manage-tags-labels/
 
 jobs:
   build:
@@ -19,6 +22,17 @@ jobs:
       - name: create Containerfile
         run: ansible-builder create
       - run: ls . context
+      - id: meta
+        # https://docs.docker.com/build/ci/github-actions/manage-tags-labels/
+        uses: docker/metadata-action@v4
+        with:
+          # list of Docker images to use as base name for tags
+          images: ghcr.io/zaki-lknr/ee-example
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
       - uses: docker/login-action@v2
         with:
           username: zaki-lknr
@@ -30,4 +44,4 @@ jobs:
           context: context
           file: context/Containerfile
           push: true
-          tags: ghcr.io/zaki-lknr/ee-example:latest
+          tags: ${{ steps.meta.outputs.tags }}
