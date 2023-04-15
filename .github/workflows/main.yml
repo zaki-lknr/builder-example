@@ -21,7 +21,6 @@ jobs:
       # - run: podman image ls
       - name: create Containerfile
         run: ansible-builder create
-      - run: ls . context
       - id: meta
         # https://docs.docker.com/build/ci/github-actions/manage-tags-labels/
         uses: docker/metadata-action@v4
