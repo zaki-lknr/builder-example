@@ -3,10 +3,7 @@ version: 1
 
 build_arg_defaults:
   EE_BASE_IMAGE: 'registry.redhat.io/ansible-automation-platform-21/ee-minimal-rhel8:latest'
-  ###
   ## require authentication
-  ## >> Error: error creating build container: initializing source docker://registry.redhat.io/ansible-automation-platform-21/ee-minimal-rhel8:latest: unable to retrieve auth token: invalid username/password: unauthorized: Please login to the Red Hat Registry using your Customer Portal credentials. Further instructions can be found here: https://access.redhat.com/RegistryAuthentication
-  # EE_BASE_IMAGE: 'quay.io/ansible/ansible-runner:stable-2.12-devel'
 
 ansible_config: 'ansible.cfg'
 
