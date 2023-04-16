@@ -32,11 +32,6 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-      - uses: docker/login-action@v2
-        with:
-          username: zaki-lknr
-          password: ${{ secrets.PERSONAL_TOKEN }}
-          registry: ghcr.io
       - name: build & push
         uses: docker/build-push-action@v4
         with:
